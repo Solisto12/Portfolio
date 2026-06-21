@@ -266,10 +266,13 @@ body.theme-dark .theme-toggle__icon--light { opacity: 0; }
 
 /* ── HERO ─────────────────────────────────────────────────────── */
 .section--hero {
-  height: 100vh; min-height: 600px; max-height: 1100px;
+  height: 100vh; 
+  min-height: 600px;
   background: var(--color-bg);
-  overflow: hidden; position: relative;
-  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  display: flex; 
+  flex-direction: column;
 }
 
 /*
