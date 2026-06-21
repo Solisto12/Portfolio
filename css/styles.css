@@ -280,37 +280,19 @@ body.theme-dark .theme-toggle__icon--light { opacity: 0; }
 
 
 /*
- * HEADSHOT — circular photo, fluid-sized at every viewport width.
+ * HEADSHOT — fills the ENTIRE hero section (full width + full height),
+ * sitting behind the name like a full-bleed background photo.
  * It sits between the blob and the name (z-index layering).
  *
- * ── TO EDIT HEADSHOT POSITION & SIZE ──────────────────────────
- * All editable values are below. Change and save — Live Server refreshes instantly.
- *
- * Position: top / left control where the photo circle anchor is placed.
- *   top: 0%  → top of hero  |  top: 50% → middle  |  top: 80% → near bottom
- *   left: 0% → left edge    |  left: 30% → left-center
- *
- * Size: width / height set the circle diameter.
- *   clamp(MIN, PREFERRED, MAX) — scales smoothly with viewport, no breakpoint jumps.
- *   Example: clamp(300px, 55vh, 700px)
- *
- * Crop: object-position controls which part of the photo shows.
+ * ── TO EDIT HEADSHOT CROP ──────────────────────────────────────
+ * Crop: object-position on .hero__photo controls which part of the photo shows.
  *   "top center" → shows face  |  "center" → shows middle  |  "50% 20%" → fine-tune
- *
- * NOTE: this size is intentionally controlled by ONE clamp() formula here rather than
- * being reset to a different fixed size per breakpoint in responsive.css — that mismatch
- * was why the photo looked "stuck" small after shrinking the window past a breakpoint
- * and then widening it back out. If you add viewport-specific overrides in responsive.css,
- * make sure they also use clamp()/vw/vh (not a fixed px box) so growing the window back
- * out always restores the original size.
  */
 .hero__photo-wrap {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: clamp(190px, 48vw, 100%);
+    inset: 0;
+    width: 100%;
     height: 100%;
-    max-width: 100%;
     z-index: 2;
 }
 
@@ -416,25 +398,39 @@ body.theme-light .hero__scroll-arrow {
 
 /* ── 75/25 SPLIT COLUMNS (Experience & Projects) ─────────────────
    Left column = existing content (timeline / project cards), right column = image panel.
-   Swap the <img src> in the HTML to change each panel's picture. */
+   Swap the <img src> in the HTML to change each panel's picture.
+   A thin vertical divider sits between the two columns.
+   .section__columns--reverse (used on Projects) puts the image on the LEFT instead. */
 .section__columns {
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 75% 1px 25%;
   gap: 2.5rem;
-  align-items: start;
+  align-items: stretch;
 }
+.section__columns--reverse { grid-template-columns: 25% 1px 75%; }
+.section__columns--reverse .section__col--main { order: 3; }
+.section__columns--reverse .section__col-divider { order: 2; }
+.section__columns--reverse .section__col--image { order: 1; }
+
 .section__col--main { min-width: 0; }
+.section__col-divider {
+  width: 1px;
+  background: var(--color-border);
+  align-self: stretch;
+}
 .section__col--image {
   position: sticky;
   top: 2.5rem;
-  align-self: start;
+  align-self: stretch;
+  min-height: 100%;
 }
 .section__col-img-wrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-surface-3);
-  aspect-ratio: 3/4;
+  height: 100%;
+  min-height: 360px;
 }
 .section__col-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 

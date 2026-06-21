@@ -443,6 +443,8 @@
         </div>
           </div>
 
+          <div class="section__col-divider" aria-hidden="true"></div>
+
           <!-- Right column (25%) — side image for the Experience section -->
           <aside class="section__col section__col--image" aria-hidden="true">
             <div class="section__col-img-wrap">
@@ -462,11 +464,12 @@
         </header>
 
         <!--
-          75/25 SPLIT LAYOUT — same pattern as Experience above.
-          Left column (75%) → existing project cards grid, untouched.
-          Right column (25%) → side image panel. Swap src on .section__col-img to change it.
+          25/75 SPLIT LAYOUT (reversed from Experience) — image on the LEFT, content on the RIGHT,
+          so this section doesn't look symmetrical to Experience above it.
+          .section__columns--reverse handles the reordering via CSS; the HTML order below
+          doesn't need to change — image markup stays last, CSS flips it visually to the left.
         -->
-        <div class="section__columns">
+        <div class="section__columns section__columns--reverse">
           <div class="section__col section__col--main">
             <div class="projects__grid">
           <a href="projects/tomato-slicer.html" class="project-card">
@@ -515,7 +518,9 @@
             </div>
           </div>
 
-          <!-- Right column (25%) — side image for the Projects section -->
+          <div class="section__col-divider" aria-hidden="true"></div>
+
+          <!-- Image column — appears on the LEFT via .section__columns--reverse -->
           <aside class="section__col section__col--image" aria-hidden="true">
             <div class="section__col-img-wrap">
               <img src="assets/images/project_bg.jpg" alt="" class="section__col-img" loading="lazy" />

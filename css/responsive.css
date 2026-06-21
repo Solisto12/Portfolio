@@ -81,10 +81,15 @@
   .resource-card { width: 260px; }
   .site-footer { padding: 2rem; }
 
-  /* 75/25 split → stacks, image panel becomes a wide banner above content */
-  .section__columns { grid-template-columns: 1fr; gap: 2rem; }
-  .section__col--image { position: static; order: -1; }
-  .section__col-img-wrap { aspect-ratio: 16/6; }
+  /* 75/25 split → stacks, image panel becomes a wide banner above content.
+     Divider is hidden (a horizontal line isn't needed once everything stacks). */
+  .section__columns,
+  .section__columns--reverse { grid-template-columns: 1fr; gap: 2rem; }
+  .section__col-divider { display: none; }
+  .section__col--image,
+  .section__columns--reverse .section__col--image { position: static; order: -1; min-height: 0; }
+  .section__columns--reverse .section__col--main { order: 2; }
+  .section__col-img-wrap { aspect-ratio: 16/6; height: auto; min-height: 0; }
 
   /* Timeline expanded: stack on tablet */
   .timeline__card-expanded { grid-template-columns: 1fr; }
