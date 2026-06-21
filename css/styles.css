@@ -266,60 +266,36 @@ body.theme-dark .theme-toggle__icon--light { opacity: 0; }
 
 /* ── HERO ─────────────────────────────────────────────────────── */
 .section--hero {
+  position: relative;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
-  position: relative;
+
+  display: flex;
+  flex-direction: column;
 }
 
-/*
- * GRADIENT BLOB — reaches top-left corner fully
- * No border-radius clip on top/left so it bleeds into corner.
- * Fades right using mask.
- */
-
-
-/*
- * HEADSHOT — fills the entire hero height as background
- * It sits between the blob and the name (z-index layering).
- *
- * ── TO EDIT HEADSHOT POSITION & SIZE ──────────────────────────
- * All editable values are below. Change and save — Live Server refreshes instantly.
- *
- * Position: top / left control where the photo circle anchor is placed.
- *   top: 0%  → top of hero  |  top: 50% → middle  |  top: 80% → near bottom
- *   left: 0% → left edge    |  left: 30% → left-center
- *
- * Size: width / height set the circle diameter.
- *   clamp(MIN, PREFERRED, MAX) — scales with viewport
- *   Example: clamp(300px, 55vh, 700px)
- *
- * Crop: object-position controls which part of the photo shows.
- *   "top center" → shows face  |  "center" → shows middle  |  "50% 20%" → fine-tune
- */
+/* BACKGROUND IMAGE LAYER */
 .hero__photo-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .hero__photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    inset: 0;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/*
- * NAME — in front of headshot (z-index 3 > photo's 2)
- * bottom-right of hero, overlapping the photo edge naturally
- */
+/* NAME */
 .hero__name-block {
   position: absolute;
   bottom: 16%;
   right: 4%;
   text-align: right;
-  z-index: 3;
+  z-index: 2;
 }
 
 .hero__name {
@@ -329,52 +305,68 @@ body.theme-dark .theme-toggle__icon--light { opacity: 0; }
   letter-spacing: -0.03em;
   line-height: 0.95;
   color: #2b2b2b;
-  display: flex; flex-direction: column; align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-/* Scroll-down arrow — centered at bottom above footer */
+/* SCROLL ARROW */
 .hero__scroll-arrow {
   position: absolute;
-  bottom: calc(15px + 0.5rem); /* above footer strip */
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
-  width: 40px; height: 40px;
-  border-radius: var(--radius-full);
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+
   border: 1.5px solid rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.7);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.875rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
-  animation: arrow-bob 4.0s ease-in-out infinite;
-  transition: background var(--dur-fast), border-color var(--dur-fast);
+  animation: arrow-bob 4s ease-in-out infinite;
 }
-body.theme-light .hero__scroll-arrow {
-  border-color: rgba(0,0,0,0.15);
-  background: rgba(0,0,0,0.05);
-  color: rgba(0,0,0,0.5);
-}
+
 .hero__scroll-arrow:hover {
   background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.4);
 }
 
 @keyframes arrow-bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
-  50%       { transform: translateX(-50%) translateY(7px); opacity: 1; }
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-50%) translateY(7px);
+    opacity: 1;
+  }
 }
 
-/* Footer — hard cut-off line, gradient stops here */
+/* FOOTER */
 .hero__footer {
-  margin-top: auto;
-  position: relative; z-index: 2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+
   padding: 1.5rem 4rem 2rem;
   border-top: 1px solid var(--color-border);
   background: var(--color-bg);
 }
-.hero__tagline { font-size: var(--text-sm); color: var(--color-text-secondary); letter-spacing: 0.02em; }
 
+.hero__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
 /* ── BUTTONS ──────────────────────────────────────────────────── */
 .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1.25rem; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast); border: 1px solid transparent; white-space: nowrap; }
 .btn:active { opacity: 0.85; }
