@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F0F0EC" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="description" content="Mechanical Engineering Student Portfolio — Illinois Institute of Technology" />
   <title>Mohammad Sharif — Mechanical Engineering</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,17 +39,11 @@
             <span class="sidebar__nav-label">About Me</span>
           </a>
         </li>
-        <li class="sidebar__nav-item sidebar__nav-item--dropdown">
-          <button class="sidebar__nav-link sidebar__nav-link--dropdown" data-section="experience" aria-expanded="false" aria-controls="expMenu">
+        <li class="sidebar__nav-item">
+          <a href="#experience" class="sidebar__nav-link" data-section="experience">
             <span class="sidebar__nav-num">03</span>
             <span class="sidebar__nav-label">Experience</span>
-            <i class="fa-solid fa-chevron-down sidebar__nav-chevron" aria-hidden="true"></i>
-          </button>
-          <ul class="sidebar__dropdown" id="expMenu" role="list">
-            <li><a href="#usg"        class="sidebar__dropdown-link" data-section="usg">USG Co-op</a></li>
-            <li><a href="#cure"       class="sidebar__dropdown-link" data-section="cure">Project C.U.R.E.</a></li>
-            <li><a href="#leadership" class="sidebar__dropdown-link" data-section="leadership">Leadership</a></li>
-          </ul>
+          </a>
         </li>
         <li class="sidebar__nav-item sidebar__nav-item--dropdown">
           <button class="sidebar__nav-link sidebar__nav-link--dropdown" data-section="projects" aria-expanded="false" aria-controls="projMenu">
@@ -98,9 +95,6 @@
         <p>Baltimore, MD</p>
       </div>
       <div class="sidebar__actions">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <i class="fa-brands fa-github" aria-hidden="true"></i>
-        </a>
         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
         </a>
@@ -541,7 +535,7 @@
           <a href="assets/pdf/resume.pdf" download class="resource-card"><i class="fa-solid fa-file-lines resource-card__icon"></i><div class="resource-card__info"><h3 class="resource-card__title">Resume</h3><p class="resource-card__meta">PDF · Updated 2024</p></div><i class="fa-solid fa-download resource-card__action"></i></a>
           <div class="resource-card resource-card--upcoming"><i class="fa-solid fa-certificate resource-card__icon"></i><div class="resource-card__info"><h3 class="resource-card__title">FE Certificate</h3><p class="resource-card__meta">Coming soon</p></div><span class="badge badge--wip">Upcoming</span></div>
           <div class="resource-card resource-card--upcoming"><i class="fa-solid fa-award resource-card__icon"></i><div class="resource-card__info"><h3 class="resource-card__title">CSWP Certificate</h3><p class="resource-card__meta">Coming soon</p></div><span class="badge badge--wip">Upcoming</span></div>
-          <a href="assets/pdf/portfolio.pdf" download class="resource-card"><i class="fa-solid fa-book resource-card__icon"></i><div class="resource-card__info"><h3 class="resource-card__title">Portfolio PDF</h3><p class="resource-card__meta">PDF · Full project gallery</p></div><i class="fa-solid fa-download resource-card__action"></i></a>
+
         </div>
       </div>
     </section>
@@ -573,7 +567,6 @@
             <p class="contact__intro">I'm actively looking for internship and co-op opportunities in mechanical engineering. Whether you have a question, a project, or just want to connect — feel free to reach out.</p>
             <ul class="contact__links" role="list">
               <li><a href="mailto:msharif@hawk.iit.edu" class="contact__link"><i class="fa-solid fa-envelope"></i>msharif@hawk.iit.edu</a></li>
-              <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact__link"><i class="fa-brands fa-github"></i>github.com/msharif</a></li>
               <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact__link"><i class="fa-brands fa-linkedin-in"></i>linkedin.com/in/msharif</a></li>
             </ul>
           </div>
