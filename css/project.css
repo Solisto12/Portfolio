@@ -1,175 +1,153 @@
 /* ═══════════════════════════════════════════════════════════════════
    project.css — Individual project pages
-   Gallery moves to RIGHT column alongside text content.
+   Gallery RIGHT of text. Hero image as 0.20 opacity page background.
 ═══════════════════════════════════════════════════════════════════ */
 
-/* Header */
+/* ── Page-level hero background image at 0.20 opacity ───────────
+   Set via <body style="--proj-hero-bg: url(...)"> in each page.
+   No HTML change needed — just set the CSS variable.            */
+body.project-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--proj-hero-bg, none);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  opacity: 0.20;
+  z-index: 0;
+  pointer-events: none;
+}
+body.project-page > * { position: relative; z-index: 1; }
+
+/* ── Sticky header ───────────────────────────────────────────── */
 .project-header {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding: 1rem 3rem;
-  background: rgba(10,10,15,0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  gap: 1rem; padding: 0.875rem 3rem;
+  background: rgba(240,240,236,0.88);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
   flex-wrap: wrap;
 }
-
-body.theme-light .project-header {
-  background: rgba(240,240,236,0.92);
-}
+body.theme-dark .project-header { background: rgba(10,10,15,0.88); }
 
 .project-back {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--font-mono); font-size: var(--text-xs);
   color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.1em;
-  transition: color 0.15s;
+  transition: color 0.15s; -webkit-tap-highlight-color: transparent;
 }
 .project-back:hover { color: var(--accent); }
-
 .project-header__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
-/* Main wrapper */
+/* ── Main wrapper ────────────────────────────────────────────── */
 .project-main { max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; }
 
-/* Hero */
-.project-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--color-border); margin-bottom: 0; }
-.project-hero--centered { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-.project-hero__title { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0.75rem 0 1rem; }
-.project-hero__subtitle { font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.6; max-width: 600px; }
-.project-hero__image-wrap { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface-2); max-height: 420px; margin-top: 2rem; }
-.project-hero__image { width: 100%; height: 100%; object-fit: cover; }
+/* ── Hero section (title + subtitle, NO separate image box) ─── */
+.project-hero { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--color-border); margin-bottom: 0; }
+.project-hero__title { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0.5rem 0 0.875rem; }
+.project-hero__subtitle { font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.6; max-width: 640px; }
 
-/* ── Two-column layout: text LEFT, gallery RIGHT ─────────────── */
+/* Section label (small caps above title) */
+.section__label { display: block; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.5rem; }
+
+/* ── Two-column body: text LEFT, gallery RIGHT ──────────────── */
 .project-body {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 300px;
   gap: 3rem;
   align-items: start;
   padding-top: 3rem;
 }
 
-/* Left column — all text sections stacked */
-.project-sections { display: flex; flex-direction: column; gap: 3rem; }
-
+/* ── Text sections ───────────────────────────────────────────── */
+.project-sections { display: flex; flex-direction: column; gap: 2.75rem; }
 .project-section { border-top: 1px solid var(--color-border); padding-top: 2rem; }
 .project-section:first-child { border-top: none; padding-top: 0; }
-.project-section__title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; margin-bottom: 1.125rem; }
+.project-section__title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; margin-bottom: 1rem; }
 .project-section__text { font-size: var(--text-base); color: var(--color-text-secondary); line-height: 1.8; }
 .project-section__placeholder {
   display: flex; align-items: center; gap: 0.75rem;
-  padding: 1.5rem; background: var(--color-surface-2);
+  padding: 1.25rem; background: var(--color-surface-2);
   border: 1px dashed var(--color-border); border-radius: var(--radius-md);
   font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-muted);
 }
 .project-section__placeholder i { color: var(--accent); }
 
-/* Right column — sticky gallery */
+/* ── Sticky gallery column ───────────────────────────────────── */
 .project-gallery-col {
-  position: sticky;
-  top: 80px; /* below sticky header */
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
+  position: sticky; top: 80px;
+  display: flex; flex-direction: column; gap: 0.75rem;
 }
-
 .project-gallery-col__heading {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-text-muted);
-  margin-bottom: 0.25rem;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-muted);
+  margin-bottom: 0.125rem;
 }
 
+/*
+ * AUTO-GALLERY: images are discovered by gallery.js via naming convention.
+ * Place files in assets/images/ named:
+ *   foam_chair_gallery01.jpg, foam_chair_gallery02.jpg, …
+ *   tomato_slicer_gallery01.jpg, …
+ *   quadruped_gallery01.jpg, …
+ *
+ * The gallery container below is populated by JS on page load.
+ * Add a data-project-id attribute to .project-gallery-col to enable auto-load.
+ */
 .project-gallery__item {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-2);
-  aspect-ratio: 4/3;
+  border-radius: var(--radius-md); overflow: hidden;
+  border: 1px solid var(--color-border); background: var(--color-surface-2);
+  aspect-ratio: 4/3; cursor: pointer;
+  transition: border-color 0.15s, transform 0.2s;
 }
-
-.project-gallery__item img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.project-gallery__item:hover img { transform: scale(1.03); }
+.project-gallery__item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.project-gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.project-gallery__item:hover img { transform: scale(1.04); }
 
 .project-gallery__placeholder {
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 0.625rem;
-  padding: 2.5rem;
-  background: var(--color-surface-2);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono); font-size: var(--text-sm);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.625rem; padding: 2.5rem; background: var(--color-surface-2);
+  border: 1px dashed var(--color-border); border-radius: var(--radius-lg);
+  color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-sm);
   aspect-ratio: 4/3;
 }
 .project-gallery__placeholder i { font-size: 1.75rem; color: var(--accent); opacity: 0.45; }
 
-/* ── Project navigation — prev/next with names ───────────────── */
-.project-nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+.project-gallery__view-all {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.625rem; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border); background: var(--color-surface-2);
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-secondary);
+  cursor: pointer; transition: border-color 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
+.project-gallery__view-all:hover { border-color: var(--accent); color: var(--accent); }
 
+/* ── Prev/Next navigation ────────────────────────────────────── */
+.project-nav {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 1rem; align-items: center;
+  margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-border);
+}
 .project-nav__btn {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.875rem 1.25rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-2);
-  color: var(--color-text-secondary);
-  transition: border-color 0.15s, color 0.15s;
-  text-decoration: none;
-  min-width: 0;
+  display: flex; flex-direction: column; gap: 0.25rem;
+  padding: 0.875rem 1.25rem; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border); background: var(--color-surface-2);
+  color: var(--color-text-secondary); transition: border-color 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
 .project-nav__btn:hover { border-color: var(--accent); color: var(--accent); }
 .project-nav__btn--next { text-align: right; }
-
-.project-nav__direction {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-}
+.project-nav__direction { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.5; display: flex; align-items: center; gap: 0.375rem; }
 .project-nav__btn--next .project-nav__direction { justify-content: flex-end; }
-
-.project-nav__name {
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.project-nav__sub {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
+.project-nav__name { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.project-nav__sub { font-size: var(--text-xs); color: var(--color-text-muted); font-style: italic; }
 .project-nav__center { text-align: center; }
 
-/* Responsive */
-@media (max-width: 800px) {
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 860px) {
   .project-body { grid-template-columns: 1fr; }
   .project-gallery-col { position: static; }
   .project-main { padding: 0 1.5rem 4rem; }
@@ -183,4 +161,9 @@ body.theme-light .project-header {
   .project-nav { grid-template-columns: 1fr; }
   .project-nav__btn--next { text-align: left; }
   .project-nav__btn--next .project-nav__direction { justify-content: flex-start; }
+}
+
+/* iOS safe area */
+@supports (padding: max(0px)) {
+  .project-header { padding-top: max(0.875rem, env(safe-area-inset-top)); }
 }
