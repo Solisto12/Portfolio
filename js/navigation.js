@@ -1,12 +1,9 @@
 /**
  * navigation.js
  * 1. Sidebar collapse/expand (desktop, persisted)
- * 2. Auto-collapse at ≤1100px (no hamburger — just shrinks)
- * 3. Mobile drawer at ≤900px (hamburger opens slide-in)
- * 4. Dropdowns
- * 5. Smooth scroll
- * 6. Active highlights — shown when expanded, numbers highlighted when collapsed
- * 7. Scroll progress
+ * 2. Auto-collapse via CSS at 900–1200px
+ * 3. NO sidebar on mobile (≤900px) — hamburger drawer only
+ * 4. Dropdowns, smooth scroll, active highlights, scroll progress
  */
 'use strict';
 
@@ -19,12 +16,10 @@
   const overlay       = document.getElementById('sidebarOverlay');
   const scrollBar     = document.getElementById('scrollProgress');
 
-  const SIDEBAR_KEY      = 'portfolio-sidebar';
-  const AUTO_COLLAPSE_BP = 1100;
-  const MOBILE_BP        = 900;
+  const SIDEBAR_KEY = 'portfolio-sidebar';
+  const MOBILE_BP   = 900;
 
   const isMobile = () => window.innerWidth <= MOBILE_BP;
-  const isNarrow = () => window.innerWidth <= AUTO_COLLAPSE_BP && window.innerWidth > MOBILE_BP;
 
   function getSaved() {
     try { return localStorage.getItem(SIDEBAR_KEY) || 'expanded'; } catch { return 'expanded'; }
@@ -38,16 +33,7 @@
     if (sidebarToggle) sidebarToggle.setAttribute('aria-expanded', state === 'expanded');
   }
 
-  /* Hamburger only visible on mobile */
-  function syncHamburger() {
-    if (isMobile()) {
-      hamburger.classList.add('is-visible');
-    } else {
-      hamburger.classList.remove('is-visible');
-    }
-  }
-
-  /* Desktop collapse toggle (chevron button) */
+  /* Desktop collapse toggle */
   function toggleDesktopSidebar() {
     const next = body.getAttribute('data-sidebar') === 'expanded' ? 'collapsed' : 'expanded';
     applySidebarState(next);
@@ -57,49 +43,48 @@
 
   if (sidebarToggle) sidebarToggle.addEventListener('click', toggleDesktopSidebar);
 
-  /* Resize: auto-collapse between 900–1100px via CSS, restore outside */
+  /* On resize: restore saved state on wide desktop, hide hamburger on desktop */
   function handleResize() {
-    if (isMobile()) { syncHamburger(); return; }
-    if (!isNarrow()) {
-      // Wide desktop: restore saved preference
-      applySidebarState(getSaved());
+    if (isMobile()) {
+      // Mobile: sidebar always off-screen, hamburger visible (CSS handles this)
+      return;
     }
-    // In narrow range, CSS handles the visual collapse via media query
-    syncHamburger();
+    // Desktop: restore saved preference (CSS media query handles auto-collapse at 900–1200px)
+    applySidebarState(getSaved());
     updateActiveHighlights();
   }
 
   window.addEventListener('resize', handleResize, { passive: true });
   applySidebarState(getSaved());
-  syncHamburger();
 
   /* Mobile drawer */
   function openDrawer() {
+    if (!sidebar) return;
     sidebar.classList.add('is-mobile-open');
-    overlay.classList.add('is-active');
-    overlay.setAttribute('aria-hidden', 'false');
-    hamburger.setAttribute('aria-expanded', 'true');
+    if (overlay) { overlay.classList.add('is-active'); overlay.setAttribute('aria-hidden', 'false'); }
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
     body.style.overflow = 'hidden';
-    const lines = hamburger.querySelectorAll('.hamburger__line');
+    const lines = hamburger ? hamburger.querySelectorAll('.hamburger__line') : [];
     if (lines[0]) lines[0].style.transform = 'translateY(7px) rotate(45deg)';
     if (lines[1]) lines[1].style.opacity   = '0';
     if (lines[2]) lines[2].style.transform = 'translateY(-7px) rotate(-45deg)';
   }
 
   function closeDrawer() {
+    if (!sidebar) return;
     sidebar.classList.remove('is-mobile-open');
-    overlay.classList.remove('is-active');
-    overlay.setAttribute('aria-hidden', 'true');
-    hamburger.setAttribute('aria-expanded', 'false');
+    if (overlay) { overlay.classList.remove('is-active'); overlay.setAttribute('aria-hidden', 'true'); }
+    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
     body.style.overflow = '';
-    hamburger.querySelectorAll('.hamburger__line').forEach(l => { l.style.transform=''; l.style.opacity=''; });
+    const lines = hamburger ? hamburger.querySelectorAll('.hamburger__line') : [];
+    lines.forEach(l => { l.style.transform = ''; l.style.opacity = ''; });
   }
 
   if (hamburger) hamburger.addEventListener('click', () => {
-    sidebar.classList.contains('is-mobile-open') ? closeDrawer() : openDrawer();
+    sidebar && sidebar.classList.contains('is-mobile-open') ? closeDrawer() : openDrawer();
   });
   if (overlay) overlay.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isMobile()) closeDrawer(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
   /* Dropdowns */
   sidebar && sidebar.querySelectorAll('.sidebar__nav-link--dropdown').forEach(trigger => {
@@ -129,7 +114,7 @@
     });
   });
 
-  /* Hero scroll arrow — slow smooth scroll to about section */
+  /* Hero scroll arrow */
   const scrollArrow = document.getElementById('heroScrollArrow');
   if (scrollArrow) {
     scrollArrow.addEventListener('click', () => {
@@ -138,34 +123,26 @@
       const start = window.scrollY;
       const end   = about.getBoundingClientRect().top + window.scrollY;
       const dist  = end - start;
-      const dur   = Math.min(Math.max(Math.abs(dist) * .01, 50), 200); // 0.8–2s depending on distance
+      const dur   = Math.min(Math.max(Math.abs(dist) * 0.01, 50), 200);
       let startTime = null;
-
       function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / dur, 1);
-        window.scrollTo(0, start + dist * ease(progress));
-        if (progress < 1) requestAnimationFrame(step);
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const p = Math.min((ts - startTime) / dur, 1);
+        window.scrollTo(0, start + dist * ease(p));
+        if (p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     });
   }
 
-  /* Active highlights */
+  /* Active section highlights */
   const SECTION_NAV_MAP = {
-    'overview':   'overview',
-    'about':      'about',
-    'experience': 'experience',
-    'usg':        'experience',
-    'cure':       'experience',
-    'leadership': 'experience',
-    'skills':     'skills',
-    'projects':   'projects',
-    'resources':  'resources',
-    'contact':    'contact',
+    'overview': 'overview', 'about': 'about',
+    'experience': 'experience', 'usg': 'experience', 'cure': 'experience',
+    'leadership': 'experience', 'vision': 'experience',
+    'projects': 'projects', 'resources': 'resources',
+    'skills': 'skills', 'contact': 'contact',
   };
 
   const allNavLinks = sidebar
@@ -174,11 +151,6 @@
 
   let currentActive = '';
 
-  function isHighlightEnabled() {
-    // Always highlight — collapsed state shows number highlights via CSS
-    return true;
-  }
-
   function updateActiveHighlights() {
     if (currentActive) setActive(currentActive);
   }
@@ -186,20 +158,10 @@
   function setActive(sectionId) {
     currentActive = sectionId;
     const navTarget = SECTION_NAV_MAP[sectionId] || sectionId;
-
     allNavLinks.forEach(link => {
       const ds = link.getAttribute('data-section') || '';
       link.classList.toggle('is-active', ds === navTarget);
     });
-
-    if (['usg', 'cure', 'leadership'].includes(sectionId)) {
-      const expMenu    = document.getElementById('expMenu');
-      const expTrigger = sidebar && sidebar.querySelector('[aria-controls="expMenu"]');
-      if (expMenu && !expMenu.classList.contains('is-open')) {
-        expMenu.classList.add('is-open');
-        if (expTrigger) expTrigger.setAttribute('aria-expanded', 'true');
-      }
-    }
   }
 
   const ratioMap = new Map();
@@ -208,7 +170,7 @@
     let bestId = '', bestRatio = -1;
     ratioMap.forEach((r, id) => { if (r > bestRatio) { bestRatio = r; bestId = id; } });
     if (bestId && bestRatio > 0) setActive(bestId);
-  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0,0.05,0.1,0.2,0.4,0.6,0.8,1.0] });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.05, 0.1, 0.2, 0.4, 0.6, 0.8, 1.0] });
 
   document.querySelectorAll('section[id], article[id]').forEach(el => {
     ratioMap.set(el.id, 0); observer.observe(el);
@@ -224,14 +186,22 @@
       sections.forEach(s => { const d = Math.abs(s.offsetTop - viewLine); if (d < minDist) { minDist = d; closest = s; } });
       if (closest) setActive(closest.id);
     }, 100);
-  }, { passive: true });
 
-  /* Scroll progress */
-  window.addEventListener('scroll', () => {
+    /* Scroll progress */
     const total = document.documentElement.scrollHeight - window.innerHeight;
-    const pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
     if (scrollBar) scrollBar.style.width = Math.min(pct, 100) + '%';
     document.documentElement.style.setProperty('--scroll-ratio', Math.min(window.scrollY / window.innerHeight, 1).toFixed(3));
+
+    /* Parallax on experience/projects image panels */
+    document.querySelectorAll('.section__col-img').forEach(img => {
+      const wrap = img.closest('.section__col--image');
+      if (!wrap) return;
+      const rect = wrap.getBoundingClientRect();
+      const ratio = (rect.top + rect.height / 2) / window.innerHeight;
+      const offset = (0.5 - ratio) * 40;
+      img.style.setProperty('--parallax-offset', `${offset}px`);
+    });
   }, { passive: true });
 
   window.NavigationModule = { closeDrawer };
