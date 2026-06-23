@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F0F0EC" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Sustainable Foam Chair — Mohammad Sharif</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,17 +14,18 @@
   <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/project.css" />
 </head>
-<body class="theme-light">
+<!--
+  HERO BACKGROUND IMAGE (0.20 opacity behind entire page):
+  Change the URL below to any image in assets/images/
+  e.g. --proj-hero-bg: url(../assets/images/foam-chair.jpg)
+-->
+<body class="theme-light project-page" style="--proj-hero-bg: url(../assets/images/foam-chair.jpg)">
 
   <header class="project-header">
     <a href="../index.html#projects" class="project-back">
       <i class="fa-solid fa-arrow-left"></i> Back to Projects
     </a>
-    <div class="project-header__tags">
-      <span class="tag">Structural Analysis</span>
-      <span class="tag">Materials</span>
-      <span class="tag">Sustainability</span>
-    </div>
+    <div class="project-header__tags"><span class="tag">Structural Analysis</span><span class="tag">Materials</span><span class="tag">Sustainability</span></div>
   </header>
 
   <main class="project-main">
@@ -31,28 +34,77 @@
       <span class="section__label">Engineering Project</span>
       <h1 class="project-hero__title">Sustainable Foam Chair</h1>
       <p class="project-hero__subtitle">Structurally optimized seating with sustainability as a primary design constraint</p>
-      <div class="project-hero__image-wrap">
-        <img src="../assets/images/foam-chair.jpg" alt="Sustainable Foam Chair" class="project-hero__image" loading="eager" onerror="this.parentElement.style.display='none'" />
-      </div>
     </section>
 
     <div class="project-body">
 
+      <!-- TEXT CONTENT (LEFT) -->
       <div class="project-sections">
+
         <section class="project-section reveal">
           <h2 class="project-section__title">Overview</h2>
           <p class="project-section__text">An environmentally conscious seating design that applies structural optimization and material lifecycle analysis to minimize environmental impact without sacrificing comfort or durability. Load paths were analyzed via FEA and material selection was guided by LCA data.</p>
         </section>
-        <section class="project-section reveal"><h2 class="project-section__title">Requirements</h2><p class="project-section__text project-section__placeholder"><i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.</p></section>
-        <section class="project-section reveal"><h2 class="project-section__title">Design Process</h2><p class="project-section__text project-section__placeholder"><i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.</p></section>
-        <section class="project-section reveal"><h2 class="project-section__title">CAD &amp; Analysis</h2><p class="project-section__text project-section__placeholder"><i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.</p></section>
-        <section class="project-section reveal"><h2 class="project-section__title">Manufacturing &amp; Testing</h2><p class="project-section__text project-section__placeholder"><i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.</p></section>
-        <section class="project-section reveal"><h2 class="project-section__title">Results &amp; Lessons Learned</h2><p class="project-section__text project-section__placeholder"><i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.</p></section>
+
+        <section class="project-section reveal">
+          <h2 class="project-section__title">Requirements</h2>
+          <p class="project-section__text project-section__placeholder">
+            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
+          </p>
+        </section>
+
+        <section class="project-section reveal">
+          <h2 class="project-section__title">Design Process</h2>
+          <p class="project-section__text project-section__placeholder">
+            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
+          </p>
+        </section>
+
+        <section class="project-section reveal">
+          <h2 class="project-section__title">CAD &amp; Analysis</h2>
+          <p class="project-section__text project-section__placeholder">
+            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
+          </p>
+        </section>
+
+        <section class="project-section reveal">
+          <h2 class="project-section__title">Manufacturing &amp; Testing</h2>
+          <p class="project-section__text project-section__placeholder">
+            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
+          </p>
+        </section>
+
+        <section class="project-section reveal">
+          <h2 class="project-section__title">Results &amp; Lessons Learned</h2>
+          <p class="project-section__text project-section__placeholder">
+            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
+          </p>
+        </section>
+
       </div>
 
-      <aside class="project-gallery-col" aria-label="Project gallery">
+      <!--
+        GALLERY (RIGHT COLUMN) — AUTO-DISCOVERY
+        ════════════════════════════════════════
+        Add photos to assets/images/ named:
+          foam-chair2_gallery01.jpg
+          foam-chair2_gallery02.jpg
+          foam-chair2_gallery03.jpg  … (unlimited)
+
+        They will appear here automatically. No HTML edits needed.
+        Click any thumbnail to open the fullscreen lightbox.
+      -->
+      <aside class="project-gallery-col" data-project-id="foam-chair2" aria-label="Project gallery">
         <p class="project-gallery-col__heading">Gallery</p>
-        <div class="project-gallery__placeholder"><i class="fa-solid fa-images"></i><span>Photos coming soon</span></div>
+        <!-- Populated automatically by project-gallery.js -->
+        <div class="project-gallery__placeholder" id="galleryPlaceholder">
+          <i class="fa-solid fa-images"></i>
+          <span>Add photos named foam-chair2_gallery01.jpg</span>
+        </div>
+        <div id="galleryItems"></div>
+        <button class="project-gallery__view-all" id="viewAllBtn" style="display:none" aria-label="View all photos">
+          <i class="fa-solid fa-grid-2"></i> View All Photos
+        </button>
       </aside>
 
     </div>
@@ -75,15 +127,87 @@
 
   </main>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image gallery" hidden>
+    <div class="lightbox__backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox__inner">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <button class="lightbox__arrow lightbox__arrow--prev" id="lightboxPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="lightbox__stage"><img class="lightbox__img" id="lightboxImg" src="" alt="" /></div>
+      <button class="lightbox__arrow lightbox__arrow--next" id="lightboxNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="lightbox__footer">
+        <span class="lightbox__counter" id="lightboxCounter">1 / 1</span>
+        <div class="lightbox__thumbs" id="lightboxThumbs"></div>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/theme.js"></script>
+  <script src="../js/gallery.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    /* Auto-load gallery images for this project page */
+    document.addEventListener('DOMContentLoaded', async () => {
+      /* Scroll reveals */
       document.querySelectorAll('.reveal').forEach(el => {
         const obs = new IntersectionObserver(entries => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target); } });
         }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
         obs.observe(el);
       });
+
+      /* Gallery auto-discovery */
+      const col = document.querySelector('.project-gallery-col[data-project-id]');
+      if (!col || !window.GalleryModule) return;
+
+      const projectId = col.getAttribute('data-project-id');
+      const placeholder = document.getElementById('galleryPlaceholder');
+      const itemsWrap   = document.getElementById('galleryItems');
+      const viewAllBtn  = document.getElementById('viewAllBtn');
+
+      /* Probe for images */
+      const found = [];
+      const checks = Array.from({ length: 20 }, (_, i) => i + 1).map(n => ({
+        n,
+        src: 'assets/images/' + projectId.replace(/-/g,'_') + '_gallery' + String(n).padStart(2,'0') + '.jpg'
+      }));
+
+      await Promise.all(checks.map(({ n, src }) => new Promise(resolve => {
+        const img = new Image();
+        img.onload  = () => { found.push({ n, src }); resolve(); };
+        img.onerror = () => resolve();
+        img.src = '../' + src;
+      })));
+
+      found.sort((a, b) => a.n - b.n);
+      const srcs = found.map(f => '../' + f.src);
+
+      if (srcs.length === 0) return; /* keep placeholder */
+
+      placeholder.style.display = 'none';
+
+      /* Show first 4 as thumbnails, rest via lightbox */
+      const preview = srcs.slice(0, 4);
+      preview.forEach((src, i) => {
+        const div = document.createElement('div');
+        div.className = 'project-gallery__item reveal';
+        const img = document.createElement('img');
+        img.src = src; img.alt = 'Gallery photo ' + (i+1); img.loading = 'lazy';
+        div.appendChild(img);
+        div.addEventListener('click', () => window.GalleryModule.open(projectId, srcs, i));
+        itemsWrap.appendChild(div);
+
+        /* Reveal animation */
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        obs.observe(div);
+      });
+
+      if (srcs.length > 4) {
+        viewAllBtn.style.display = 'flex';
+        viewAllBtn.textContent = 'View All ' + srcs.length + ' Photos';
+        viewAllBtn.addEventListener('click', () => window.GalleryModule.open(projectId, srcs, 0));
+      }
     });
   </script>
 </body>
