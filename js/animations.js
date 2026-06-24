@@ -137,11 +137,13 @@
     }
   }
 
-  /* ── 4. Contact form ─────────────────────────────────────────── */
+  /* ── 4. Contact form — sends email via mailto fallback ────────── */
   function initContactForm() {
     const form   = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
     if (!form) return;
+
+    const TO_EMAIL = form.getAttribute('data-email') || 'mohashah1213@gmail.com';
 
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -158,17 +160,42 @@
         return;
       }
 
-      // Simulate send (replace with real endpoint later)
       const btn = form.querySelector('button[type="submit"]');
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening mail…';
 
-      setTimeout(() => {
-        showStatus('Message sent! I\'ll get back to you soon.', 'success');
-        form.reset();
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-      }, 1200);
+      /*
+       * Build a mailto: link pre-filled with the message.
+       * This opens the user's default email app with:
+       *   To:      mohashah1213@gmail.com
+       *   Subject: Portfolio Contact — [Name]
+       *   Body:    Name, sender email, and message
+       *
+       * NOTE: For a server-side send (no mailto popup), replace this block
+       * with a fetch() to a backend endpoint or a service like Formspree:
+       *   fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: new FormData(form) })
+       */
+      const subject = encodeURIComponent('Portfolio Contact — ' + name);
+      const body    = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n\n' +
+        message
+      );
+      const mailto  = 'mailto:' + TO_EMAIL + '?subject=' + subject + '&body=' + body;
+
+      // Open mailto in a hidden link (avoids popup blockers)
+      const a = document.createElement('a');
+      a.href = mailto;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      showStatus('Your email app has opened — send from there to complete your message.', 'success');
+      form.reset();
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
     });
 
     function showStatus(msg, type) {
@@ -177,7 +204,7 @@
       status.style.color = type === 'success'
         ? 'var(--color-success)'
         : 'var(--color-warning)';
-      setTimeout(() => { status.textContent = ''; }, 5000);
+      setTimeout(() => { status.textContent = ''; }, 7000);
     }
   }
 
