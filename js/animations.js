@@ -215,4 +215,49 @@
 
   window.AnimationsModule = { toggleTimelineCard };
 
+/* ── Resource viewer ─────────────────────────────────────────── */
+function initResourceViewer() {
+  const viewer   = document.getElementById('resourceViewer');
+  const backdrop = document.getElementById('resourceViewerBackdrop');
+  const closeBtn = document.getElementById('resourceViewerClose');
+  const frame    = document.getElementById('resourceViewerFrame');
+  const title    = document.getElementById('resourceViewerTitle');
+  const dlBtn    = document.getElementById('resourceViewerDownload');
+
+  if (!viewer) return;
+
+  function openViewer(filePath, fileTitle) {
+    frame.src = filePath;
+    title.textContent = fileTitle;
+    dlBtn.href = filePath;
+    dlBtn.setAttribute('download', fileTitle);
+    viewer.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeViewer() {
+    viewer.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    frame.src = '';
+  }
+
+  closeBtn.addEventListener('click', closeViewer);
+  backdrop.addEventListener('click', closeViewer);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !viewer.hasAttribute('hidden')) closeViewer();
+  });
+
+  // Wire up all resource cards that have data-file
+  document.querySelectorAll('.resource-card[data-file]').forEach(card => {
+    card.addEventListener('click', () => {
+      const file  = card.getAttribute('data-file');
+      const label = card.getAttribute('data-title') || 'Document';
+      openViewer(file, label);
+    });
+  });
+}
+
+initResourceViewer();
+
 })();
