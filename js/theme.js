@@ -59,7 +59,7 @@
         let maxVal=0,maxIdx=0;
         for(let i=0;i<bins.length;i++){if(bins[i]>maxVal){maxVal=bins[i];maxIdx=i;}}
         if(maxVal<25){resolve(null);return;}
-        const h=maxIdx*5+2,s=35,l=40;
+        const h=maxIdx*5+2,s=20,l=30;
         resolve({
           primary:hslToHex(h,s,l),secondary:hslToHex(h,s-5,l+12),accent:hslToHex(h,s+5,l+6),
           gradientStart:hslToHex(h,s,l),gradientMid:hslToHex(h,s-8,l+18),gradientEnd:hslToHex(h,s-10,l-20),
