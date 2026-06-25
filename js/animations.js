@@ -86,8 +86,8 @@
   /* ── 3. Timeline expand/collapse ─────────────────────────────── */
   function initTimeline() {
     document.querySelectorAll('.timeline__card').forEach(card => {
-      card.addEventListener('click', () => toggleTimelineCard(card));
-      card.addEventListener('keydown', e => {
+      card.Listener('click', () => toggleTimelineCard(card));
+      card.Listener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           toggleTimelineCard(card);
@@ -146,41 +146,31 @@
     const TO_EMAIL = form.getAttribute('data-email') || 'mohashah1213@gmail.com';
 
     form.addEventListener('submit', e => {
-      e.preventDefault();
-      const name    = form.contactName.value.trim();
-      const email   = form.contactEmail.value.trim();
-      const message = form.contactMessage.value.trim();
+  e.preventDefault();
+  const message = form.contactMessage.value.trim();
 
-      if (!name || !email || !message) {
-        showStatus('Please fill in all fields.', 'error');
-        return;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showStatus('Please enter a valid email address.', 'error');
-        return;
-      }
+  if (!message) {
+    showStatus('Please enter a message.', 'error');
+    return;
+  }
 
-      const btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening mail…';
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening mail…';
 
-      /*
-       * Build a mailto: link pre-filled with the message.
-       * This opens the user's default email app with:
-       *   To:      mohashah1213@gmail.com
-       *   Subject: Portfolio Contact — [Name]
-       *   Body:    Name, sender email, and message
-       *
-       * NOTE: For a server-side send (no mailto popup), replace this block
-       * with a fetch() to a backend endpoint or a service like Formspree:
-       *   fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: new FormData(form) })
-       */
-      const subject = encodeURIComponent('Portfolio Contact — ' + name);
-      const body    = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n\n' +
-        message
-      );
+  const subject = encodeURIComponent('Portfolio Contact');
+  const body    = encodeURIComponent(message);
+  const mailto  = 'mailto:' + TO_EMAIL + '?subject=' + subject + '&body=' + body;
+
+  const a = document.createElement('a');
+  a.href = mailto; a.target = '_blank'; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+  showStatus('Your email app has opened — send from there.', 'success');
+  form.reset();
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+});
       const mailto  = 'mailto:' + TO_EMAIL + '?subject=' + subject + '&body=' + body;
 
       // Open mailto in a hidden link (avoids popup blockers)
