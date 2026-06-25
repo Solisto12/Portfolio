@@ -315,14 +315,14 @@ body.theme-dark .theme-toggle__icon--light { opacity: 0; }
 .hero__scroll-arrow {
   position: absolute; bottom: calc(15px + 0.5rem); left: 50%; transform: translateX(-50%);
   z-index: 3; width: 40px; height: 40px; border-radius: var(--radius-full);
-  border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--color-accent-dim); background: var(--color-accent-dim);
+  color: var(--accent); display: flex; align-items: center; justify-content: center;
   font-size: 0.875rem; cursor: pointer;
   animation: arrow-bob 4.0s ease-in-out infinite;
   transition: background var(--dur-fast), border-color var(--dur-fast);
   -webkit-tap-highlight-color: transparent;
 }
-.hero__scroll-arrow:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
+.hero__scroll-arrow:hover { background: var(--color-accent-glow); border-color: var(--accent); }
 @keyframes arrow-bob {
   0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
   50%       { transform: translateX(-50%) translateY(7px); opacity: 1; }
