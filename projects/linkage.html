@@ -32,8 +32,8 @@
 
     <section class="project-hero">
       <span class="section__label">Engineering Project</span>
-      <h1 class="project-hero__title">Tomato Slicer</h1>
-      <p class="project-hero__subtitle">Precision food-processing mechanism for uniform, repeatable slicing</p>
+      <h1 class="project-hero__title">EV Charging Robotic Linkage</h1>
+      <p class="project-hero__subtitle">1 DOF robotic linkage optimized through MATLAB</p>
     </section>
 
     <div class="project-body">
@@ -43,42 +43,47 @@
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Overview</h2>
-          <p class="project-section__text">A precision food-processing mechanism designed to produce uniform, repeatable slices of tomatoes and similar soft produce. The project focused on mechanism synthesis, ergonomic grip design, and material selection suitable for food-contact applications.</p>
+          <p class="project-section__text">Designed and fabricated an automated electric vehicle charging mechanism capable of guiding a charging connector through a precise trajectory using a single four-bar linkage. The project combined mechanism synthesis, MATLAB-based kinematic optimization, dynamic force analysis, Arduino control, and physical prototyping to create a compact system that accurately extended, connected, and retracted within strict spatial constraints.</p>
         </section>
 
         <section class="project-section reveal">
-          <h2 class="project-section__title">Requirements</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
-        </section>
+  <h2 class="project-section__title">Requirements</h2>
+  <ul class="project-section__text">
+    <p class="project-section__text">The mechanism was designed to satisfy a series of mechanical and control requirements:</p>
+    <p class="project-section__text">-------------------------------------------------------------</p>
+    <li>Operate entirely within a 400 × 450 × 500 mm enclosure when retracted.</li>
+    <li>Extend an end-effector through a 4 × 4 inch opening to reach a predefined charging location.</li>
+    <li>Be actuated using a single HS-425BB servo motor controlled by an Arduino.</li>
+    <li>Respond only to a specified infrared command before executing the charging sequence.</li>
+    <li>Maintain contact at the charging position before safely retracting without disturbing the target.</li>
+  </ul>
+</section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Design Process</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">The project began with four-bar linkage synthesis using the Four-Point Circle Construction method to establish an initial mechanism geometry. While the preliminary design approximated the required motion, it failed to satisfy packaging constraints and connector reach.</p>
+          <p class="project-section__text">A custom MATLAB optimization program was then developed to optimize link lengths, pivot locations, and end-effector geometry using nonlinear constrained optimization. The solver minimized trajectory error while enforcing Grashof conditions, frame clearance, and manufacturability constraints. The optimized linkage produced a significantly more accurate charging path while remaining fully contained inside the enclosure when retracted.</p>
         </section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">CAD &amp; Analysis</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">Following optimization, the mechanism was modeled in CAD and analyzed using classical dynamics.</p>
+          <p class="project-section__text">Free body diagrams were developed for each moving link to determine internal forces, joint reactions, and the torque required throughout the mechanism's motion. These calculations verified that the selected servo motor provided sufficient torque to operate the linkage under expected loading conditions without stalling.</p>
+          <p class="project-section__text">MATLAB trajectory analysis further validated that the optimized end-effector consistently reached the required charging location while maintaining smooth and repeatable motion.</p>
         </section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Manufacturing &amp; Testing</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">The final prototype was fabricated from laser-cut MDF components and integrated with an Arduino Uno, infrared receiver, HS-425BB servo motor, and external power supply.</p>
+          <p class="project-section__text">Initial testing identified mechanical instability at the secondary ground pivot, leading to the design and 3D printing of a custom PLA support bracket that eliminated linkage drift. Additional debugging refined the Arduino control logic, corrected startup positioning, and improved IR communication reliability.</p>
+          <p class="project-section__text">The completed system successfully executed the full charging sequence by receiving an infrared command, extending the end-effector, maintaining contact long enough to illuminate an LED through conductive tape, and safely retracting to its home position.</p>
         </section>
 
         <section class="project-section reveal">
-          <h2 class="project-section__title">Results &amp; Lessons Learned</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <h2 class="project-section__title">Results &amp; Lessons</h2>
+          <p class="project-section__text">The final mechanism successfully achieved the required charging trajectory while satisfying both mechanical packaging and control system requirements. MATLAB optimization substantially improved path accuracy over the initial design, while dynamic analysis confirmed that the selected actuator could reliably drive the linkage.</p>
+          <p class="project-section__text">This project reinforced the importance of integrating computational optimization with experimental validation. While kinematic analysis produced an accurate theoretical solution, prototype testing exposed practical challenges—including structural rigidity, sensor integration, and software behavior—that required iterative refinement before achieving reliable autonomous operation.</p>
+          <p class="project-section__text">The project strengthened my experience with mechanism synthesis, MATLAB optimization, multibody dynamics, Arduino programming, CAD, rapid prototyping, and electromechanical system integration.</p>
         </section>
 
       </div>
