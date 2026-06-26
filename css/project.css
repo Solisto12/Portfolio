@@ -167,3 +167,25 @@ body.theme-dark .project-header { background: rgba(10,10,15,0.88); }
 @supports (padding: max(0px)) {
   .project-header { padding-top: max(0.875rem, env(safe-area-inset-top)); }
 }
+
+/* All Projects button matches prev/next style */
+.project-nav__center .btn--secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text-secondary);
+  transition: border-color 0.15s, color 0.15s;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  min-height: unset;
+}
+.project-nav__center .btn--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--color-surface-2);
+  filter: none;
+}
