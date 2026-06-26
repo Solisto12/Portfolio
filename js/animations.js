@@ -86,8 +86,8 @@
   /* ── 3. Timeline expand/collapse ─────────────────────────────── */
   function initTimeline() {
     document.querySelectorAll('.timeline__card').forEach(card => {
-      card.Listener('click', () => toggleTimelineCard(card));
-      card.Listener('keydown', e => {
+      card.addEventListener('click', () => toggleTimelineCard(card));
+      card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           toggleTimelineCard(card);
@@ -258,6 +258,5 @@ function initResourceViewer() {
   });
 }
 
-initResourceViewer();
 
 })();
