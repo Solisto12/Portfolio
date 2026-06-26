@@ -25,7 +25,7 @@
     <a href="../index.html#projects" class="project-back">
       <i class="fa-solid fa-arrow-left"></i> Back to Projects
     </a>
-    <div class="project-header__tags"><span class="tag">Structural Analysis</span><span class="tag">Materials</span><span class="tag">Sustainability</span></div>
+    <div class="project-header__tags"><span class="tag">Structural Analysis</span><span class="tag">FEA</span><span class="tag">Laser Cutting</span></div>
   </header>
 
   <main class="project-main">
@@ -33,7 +33,7 @@
     <section class="project-hero">
       <span class="section__label">Engineering Project</span>
       <h1 class="project-hero__title">Sustainable Foam Chair</h1>
-      <p class="project-hero__subtitle">Structurally optimized seating with sustainability as a primary design constraint</p>
+      <p class="project-hero__subtitle">Structurally optimized seating designed for sustainability.</p>
     </section>
 
     <div class="project-body">
@@ -43,42 +43,43 @@
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Overview</h2>
-          <p class="project-section__text">An environmentally conscious seating design that applies structural optimization and material lifecycle analysis to minimize environmental impact without sacrificing comfort or durability. Load paths were analyzed via FEA and material selection was guided by LCA data.</p>
+          <p class="project-section__text">Designed and fabricated a lightweight chair from 4.76 mm foam core board capable of supporting a 103 kg static load while weighing only 370 g. The project emphasized sustainable engineering principles by eliminating adhesives and fasteners, relying entirely on interlocking joints for assembly and disassembly. Structural decisions were guided through iterative prototyping, Lines of Force analysis, and Finite Element Analysis (FEA) to maximize stiffness while minimizing material usage.</p>
         </section>
 
         <section class="project-section reveal">
-          <h2 class="project-section__title">Requirements</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
-        </section>
+  <h2 class="project-section__title">Requirements</h2>
+  <ul class="project-section__text">
+    <li>Support a 103 kg static load without structural failure.</li>
+    <li>Maintain a total mass below 800 g, with a stretch goal of 400 g.</li>
+    <li>Construct the chair exclusively from 4.76 mm foam core board.</li>
+    <li>Use no adhesives, tape, or mechanical fasteners.</li>
+    <li>Meet ergonomic seat and backrest dimensional requirements while remaining fully manufacturable from flat sheet stock.</li>
+  </ul>
+</section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Design Process</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">Three initial concepts were developed and compared using a weighted Pugh decision matrix that evaluated stability, load capacity, comfort, manufacturability, weight, and material efficiency.</p>
+          <p class="project-section__text">After selecting the strongest concept, the design evolved through four prototype iterations. Each iteration addressed a specific failure mode observed during testing, including leg instability, buckling caused by excessive lightweighting, and insufficient backrest stiffness. The final design introduced interlocking X-braced legs, reinforced load paths, and redesigned backrest supports, resulting in a lightweight structure capable of meeting all project requirements.</p>
         </section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">CAD &amp; Analysis</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">All components were modeled in CAD before fabrication and evaluated using both qualitative and computational structural analysis techniques.</p>
+          <p class="project-section__text">Lines of Force analysis identified how compressive loads traveled through the chair while revealing stress concentrations at the backrest-seat interface. These findings were validated using Finite Element Analysis (FEA), which highlighted the same regions as critical load-transfer locations. Although foam core material properties limited quantitative accuracy, FEA effectively guided reinforcement placement, larger fillet radii, and improved connector geometry before physical prototyping.</p>
         </section>
 
         <section class="project-section reveal">
           <h2 class="project-section__title">Manufacturing &amp; Testing</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <p class="project-section__text">The final prototype consisted of seven precision-cut interlocking components manufactured entirely from foam core board. Multiple physical prototypes were assembled and tested under progressively higher loads to validate structural performance and identify failure mechanisms.</p>
+          <p class="project-section__text">Testing revealed issues such as leg splaying, local buckling, and backrest flex, each of which informed subsequent design revisions. Reinforced X-leg geometry, improved connector design, and additional backrest supports ultimately produced a stable structure capable of safely supporting the required load without permanent deformation.</p>
         </section>
 
         <section class="project-section reveal">
-          <h2 class="project-section__title">Results &amp; Lessons Learned</h2>
-          <p class="project-section__text project-section__placeholder">
-            <i class="fa-solid fa-clock-rotate-left"></i> Content in progress — check back soon.
-          </p>
+          <h2 class="project-section__title">Results &amp; Lessons learned</h2>
+          <p class="project-section__text">The completed chair successfully supported a 103 kg user while weighing only 370 g, exceeding the project's lightweight target by finishing below the 400 g bonus threshold.</p>
+          <p class="project-section__text">More importantly, the project demonstrated that effective lightweight design depends on strategic material placement rather than simply removing material. Combining computational analysis with iterative physical testing proved essential, as simulations identified stress concentrations while prototype testing exposed real-world stability issues that digital models alone could not predict.</p>
+          <p class="project-section__text">The project strengthened my experience with CAD-driven design, structural optimization, Finite Element Analysis, engineering decision matrices, rapid prototyping, and design iteration under strict manufacturing constraints.</p>
         </section>
 
       </div>
