@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F0F0EC" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Portfolio Website — Mohammad Sharif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Agu+Display&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+  <link rel="stylesheet" href="../css/project-portfolio.css" />
+</head>
+<!--
+  HERO BACKGROUND IMAGE (0.20 opacity behind entire page):
+  Place a screenshot at: assets/images/portfolio-bg.jpg
+-->
+<body class="theme-light project-page" style="--proj-hero-bg: url(../assets/images/portfolio-bg.jpg)">
+
+  <header class="project-header">
+    <a href="../index.html#projects" class="project-back">
+      <i class="fa-solid fa-arrow-left"></i> Back to Projects
+    </a>
+    <div class="project-header__tags">
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">UI/UX Design</span>
+    </div>
+  </header>
+
+  <main class="project-main">
+
+    <!-- Hero -->
+    <section class="project-hero">
+      <span class="section__label">Personal Project</span>
+      <h1 class="project-hero__title">Portfolio Website</h1>
+      <p class="project-hero__subtitle">A handcrafted engineering portfolio built from scratch with vanilla HTML, CSS, and JavaScript — no frameworks</p>
+    </section>
+
+    <!-- ═══ BEFORE / AFTER COMPARISON ═══════════════════════════
+         Left: Before image  |  Right: After image
+         Place images at:
+           assets/images/portfolio-before.jpg
+           assets/images/portfolio-after.jpg
+    ════════════════════════════════════════════════════════════ -->
+    <div class="portfolio-compare reveal">
+
+      <div class="portfolio-compare__panel">
+        <div class="portfolio-compare__label">
+          <span class="portfolio-compare__badge portfolio-compare__badge--before">Before</span>
+        </div>
+        <div class="portfolio-compare__img-wrap">
+          <img
+            src="../assets/images/portfolio-before.jpg"
+            alt="Portfolio before — original design"
+            class="portfolio-compare__img"
+            onerror="this.parentElement.classList.add('portfolio-compare__img-wrap--empty')"
+          />
+          <div class="portfolio-compare__empty-state" aria-hidden="true">
+            <i class="fa-solid fa-image"></i>
+            <span>Add assets/images/portfolio-before.jpg</span>
+          </div>
+        </div>
+        <p class="portfolio-compare__caption">Initial design iteration</p>
+      </div>
+
+      <div class="portfolio-compare__divider" aria-hidden="true">
+        <div class="portfolio-compare__divider-line"></div>
+        <div class="portfolio-compare__divider-icon">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+        <div class="portfolio-compare__divider-line"></div>
+      </div>
+
+      <div class="portfolio-compare__panel">
+        <div class="portfolio-compare__label">
+          <span class="portfolio-compare__badge portfolio-compare__badge--after">After</span>
+        </div>
+        <div class="portfolio-compare__img-wrap">
+          <img
+            src="../assets/images/portfolio-after.jpg"
+            alt="Portfolio after — current design"
+            class="portfolio-compare__img"
+            onerror="this.parentElement.classList.add('portfolio-compare__img-wrap--empty')"
+          />
+          <div class="portfolio-compare__empty-state" aria-hidden="true">
+            <i class="fa-solid fa-image"></i>
+            <span>Add assets/images/portfolio-after.jpg</span>
+          </div>
+        </div>
+        <p class="portfolio-compare__caption">Current production design</p>
+      </div>
+
+    </div>
+
+    <!-- ═══ TEXT SECTIONS — only Overview, Design Process, Results ═══ -->
+    <div class="portfolio-sections">
+
+      <section class="project-section reveal">
+        <h2 class="project-section__title">Overview</h2>
+        <p class="project-section__text">
+          This portfolio was designed and built entirely from scratch as a personal engineering project. The goal was to create a high-end, production-quality website that reflects both technical depth and design sensibility — without relying on any JavaScript frameworks, CSS libraries, or templates.
+        </p>
+        <p class="project-section__text" style="margin-top: 1rem;">
+          The site features a fixed sidebar navigation with dynamic accent color extraction from the hero headshot, immersive split-layout experience and project sections, a fullscreen lightbox gallery, a document viewer modal, and full iOS/Android compatibility — all in vanilla HTML, CSS, and JavaScript.
+        </p>
+      </section>
+
+      <section class="project-section reveal">
+        <h2 class="project-section__title">Design Process</h2>
+        <p class="project-section__text">
+          The design evolved through multiple iterations informed by references from Awwwards, Apple, and Tesla. Key decisions included inverting the traditional image/text relationship in the experience and projects sections — making images the dominant visual element with text overlaid in glassmorphism panels — and building a color system that automatically extracts dominant hues from the hero photo to theme the entire site dynamically.
+        </p>
+        <ul class="exp-bullets" style="margin-top: 1rem;">
+          <li>Designed the layout system around a fixed sidebar and full-width scrolling content area, with automatic collapse behavior at tablet widths</li>
+          <li>Built a custom canvas-based color extraction algorithm that reads the headshot and maps dominant hues to CSS custom properties sitewide</li>
+          <li>Implemented a reusable lightbox gallery with auto-discovery of numbered image files — no HTML edits needed to add photos</li>
+          <li>Created a document viewer modal with iframe embedding, download button, and keyboard/touch dismiss support</li>
+          <li>Tuned all animations to use only transform and opacity — GPU-composited, no layout thrash, 60fps on mobile</li>
+        </ul>
+      </section>
+
+      <section class="project-section reveal">
+        <h2 class="project-section__title">Results &amp; Lessons Learned</h2>
+        <p class="project-section__text">
+          The finished site achieves a premium engineering portfolio aesthetic while remaining fully maintainable without a build system. Adding a new project requires creating one HTML file and dropping images into a naming convention — no framework knowledge needed.
+        </p>
+        <ul class="exp-bullets" style="margin-top: 1rem;">
+          <li>Learned that CSS custom properties + a single canvas color-extraction pass can replace entire theming libraries</li>
+          <li>Discovered that <code>IntersectionObserver</code> with multiple thresholds eliminates scroll-event polling entirely for both reveal animations and active nav highlighting</li>
+          <li>Sidebar responsive behavior required careful coordination between CSS media queries and JavaScript guards to prevent conflicting state at breakpoint edges</li>
+          <li>The most impactful design decision was treating images as background elements rather than content — it immediately elevated the aesthetic from template to editorial</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav class="project-nav" aria-label="Project navigation">
+      <span></span>
+      <div class="project-nav__center">
+        <a href="../index.html#projects" class="btn btn--secondary">All Projects</a>
+      </div>
+      <span></span>
+    </nav>
+
+  </main>
+
+  <!-- LIGHTBOX (kept for consistency) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image gallery" hidden>
+    <div class="lightbox__backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox__inner">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <button class="lightbox__arrow lightbox__arrow--prev" id="lightboxPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="lightbox__stage"><img class="lightbox__img" id="lightboxImg" src="" alt="" /></div>
+      <button class="lightbox__arrow lightbox__arrow--next" id="lightboxNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="lightbox__footer">
+        <span class="lightbox__counter" id="lightboxCounter">1 / 1</span>
+        <div class="lightbox__thumbs" id="lightboxThumbs"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/gallery.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+        obs.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
