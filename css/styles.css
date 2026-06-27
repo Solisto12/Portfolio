@@ -669,7 +669,7 @@ body.theme-light .timeline__marker::after { border-color: #FFFFFF; }
   max-width: 600px;
 }
 .lightbox__thumb {
-  width: 52px; height: 40px; border-radius: var(--radius-sm);
+  width: 30px; height: 20px; border-radius: var(--radius-sm);
   overflow: hidden; cursor: pointer; opacity: 0.45;
   border: 1.5px solid transparent;
   transition: opacity var(--dur-fast), border-color var(--dur-fast);
