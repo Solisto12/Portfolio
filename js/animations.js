@@ -144,15 +144,16 @@
       const body    = encodeURIComponent(message);
       const mailto  = 'mailto:' + TO_EMAIL + '?subject=' + subject + '&body=' + body;
 
-      const a = document.createElement('a');
-      a.href = mailto;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      /*
+       * Use window.location.href for mailto — this is the only reliable
+       * cross-browser method. window.open() navigates the tab (as seen
+       * in the screenshot). a.click() has the same problem in Chrome.
+       * window.location.href triggers the OS email client without
+       * navigating away from the page.
+       */
+      window.location.href = mailto;
 
-      showStatus('Your email app has opened — send from there.', 'success');
+      showStatus('Your email app should open — complete sending from there.', 'success');
       form.reset();
 
       if (btn) {
